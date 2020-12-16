@@ -1,4 +1,5 @@
 import csv
+import copy
 
 class calculator:
 
@@ -15,23 +16,25 @@ class calculator:
         look_up = dict()
 
         with open('data/relics.tsv', 'r') as c:
-                tsv_reader = csv.DictReader(c, delimiter='\t')
-                for row in tsv_reader:
-                    relics.append(row)
+            tsv_reader = csv.DictReader(c, delimiter='\t')
+            for row in tsv_reader:
+                relics.append(row)
 
         for relic in relics:
             relic['id'] = int(relic['id'])
             relic['price'] = int(relic['price'])
-            components = relic['Component Relics'].strip().split(',')
-            int_comp = list()
-            for i in range(len(components)):
-                if (components[i]):
-                    int_comp.append(int(components[i]))                            
+            components = list()
+            for r in relic['Component Relics'].strip().split(','):
+                if r:
+                    components.append(int(r))
 
-            relic['Component Relics'] = int_comp
-
-            relic_dic[relic['id']] = {'name':relic['name'], 'price':relic['price'], 'quality':relic['quality'], 'components':relic['Component Relics']}
+            relic_dic[relic['id']] = {'name':relic['name'], 'total_cost':relic['price'], 'quality':relic['quality'], 'components':components}
             look_up[relic['name']] = relic['id']
+
+        with open('data/relic_stats.tsv', 'r') as c:
+            tsv_reader = csv.DictReader(c, delimiter='\t')
+            for row in tsv_reader:
+                relics.append(row)        
 
         return relic_dic, look_up
 
@@ -67,11 +70,18 @@ class calculator:
 
         return False
 
+    def get_total_cost_for_multiple_relics(self, wants, haves=list()):
+        essence = 0
+        for want in wants:
+            essence += self.get_total_cost(want, haves)
+        
+        return essence 
+
     def get_total_cost(self, want, haves = list()):        
-        essence = self.relics[want]['price']
+        essence = self.relics[want]['total_cost']
         for have in haves:
             if self.contains_relic(want, have):
-                essence -= self.relics[have]['price']
+                essence -= self.relics[have]['total_cost']
 
         return essence
 
@@ -116,8 +126,88 @@ def sanity_check(calc):
 
 if __name__ == "__main__":
     calc = calculator()
-    sanity_check(calc)
-    
+    relic_ids = list()
+    haves = list()
+
+    have_lookup = {
+        "The Wall": 1, 
+        "Compassion's Core":2, 
+        "Immortal's Cinctures":2, 
+        "Eye Of Wisdom": 2, 
+        "Chalice of Light": 1, 
+        "Kuilin Ring":1, 
+        "Rambler's Boots":2,
+        "Blitz Arc": 2, 
+        "Noble Blade": 2, 
+        "Determination's Core": 1, 
+        "Agility's Core": 2}
+
+    for r, num in have_lookup.items():
+        for i in range(num):
+            haves.append(calc.look_up[r])
+
+    thresholds = dict()
+
+    relic_ids.append(calc.relic_tree['might'][4][1])
+    relic_ids.append(calc.relic_tree['might'][4][3])
+    relic_ids.append(calc.relic_tree['might'][4][5])
+    relic_ids.append(calc.relic_tree['might'][4][6])
+
+    thresholds['might 5.0'] = copy.deepcopy(relic_ids)
 
     
+    relic_ids.append(5104) # 40% atk
+    thresholds['might 5.1'] = copy.deepcopy(relic_ids)
+    relic_ids.append(5205) # 43% atk
+    thresholds['might 5.2'] = copy.deepcopy(relic_ids)
+    # relic_ids.append(5204) # 38% atk
+    relic_ids.append(5106) # 42% atk
+    thresholds['might 5.4'] = copy.deepcopy(relic_ids)
+
+    for r in calc.relic_tree['sustenance'][4]:
+        if r:
+            relic_ids.append(r)    
+    thresholds['might 5.4 + sus 5.0'] = copy.deepcopy(relic_ids)
+
+    for r in calc.relic_tree['fortitude'][4]:
+        if r:
+            relic_ids.append(r)
+    # fort
+    relic_ids.append(5202) # 24% atk
+    relic_ids.append(5204) # 38% atk
+    relic_ids.append(5205) # 43% atk
+    relic_ids.append(5106) # 42% atk
+    thresholds['might 5.4 + sus 5.0 + fort 5.4'] = copy.deepcopy(relic_ids)
+
+    for r in calc.relic_tree['sorcery'][4]:
+        if r:
+            relic_ids.append(r)            
+    
+    # sorc
+    relic_ids.append(5202) # 24% atk
+    relic_ids.append(5404) # 28% atk
+    relic_ids.append(5405) # 69% atk
+    relic_ids.append(5406) # 47% atk
+    thresholds['might 5.4 + sus 5.0 + fort 5.4 + sorc 5.4'] = copy.deepcopy(relic_ids)
+    
+    eph = 11472
+    current_essence = 297450
+
+
+    print("================================")
+    print("PARAMETERS USED")
+    print("================================")
+    print(f"Current EPH = {eph} essence/h")
+    print(f"Current Essence = {current_essence}")
+    print(f"Current relics = {[name + ' ' +str(value)+'x' for name, value in have_lookup.items()]}")
+    for k,v in thresholds.items():
+        total_cost = calc.get_total_cost_for_multiple_relics(v, haves)
+        num_hours = (total_cost-current_essence)/eph
+        num_days = num_hours / 24
+        print("================================")
+        print(f"{k.upper()}")
+        print("================================")
+        print(f"Time taken = {round(num_hours, 2)} hours")
+        print(f"Time taken = {round(num_days, 2)} days")
+
     pass
