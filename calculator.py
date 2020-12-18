@@ -2,6 +2,7 @@ import csv
 import copy
 import random
 import math
+from datetime import datetime
 
 class calculator:
 
@@ -159,7 +160,11 @@ class calculator:
 
         return relics
 
-    def calculate(self):
+
+#============================================
+# Voiren
+#============================================
+    def calculate_voiren(self):
         relic_ids = list()
         haves = list()
 
@@ -236,6 +241,132 @@ class calculator:
         if eph != settled_eph:
             "Discrepencies between given eph, and eph calculated from settlements"
             return
+        print(f"Voiren - {datetime.now()}")
+        print(f"Current EPH = {eph} essence/h")
+        print(f"Current Essence = {current_essence}")
+        print(f"Current relics = {[name + ' ' +str(value)+'x' for name, value in have_lookup.items()]}")
+        for k,v in thresholds.items():
+            print("================================================================")
+            print(f"Hitting {k.upper()}")
+            print("================================================================")
+
+            total_cost, remains_no_relic = self.get_total_cost_for_multiple_relics(v, haves)
+            num_hours = (total_cost-current_essence)/eph
+            num_days = num_hours / 24        
+            print(f"Time taken (Without Relic Drops) = {round(num_hours, 2)} hours")
+            print(f"Time taken (Without Relic Drops) = {round(num_days, 2)} days")
+
+            if self.verbose:
+                print(f"Relics not used = {[self.relics[name]['name'] for name in remains_no_relic]}")
+
+            sold_essence = sum([self.relics[relic]['total_cost']*.4 for relic in remains_no_relic])
+            total_cost, remains_no_relic = self.get_total_cost_for_multiple_relics(v, haves)
+            num_hours = (total_cost-(current_essence+sold_essence))/eph
+            num_days = num_hours / 24               
+            print(f"Time taken (Without Relic Drops & Selling Unused Relics) = {round(num_hours, 2)} hours")
+            print(f"Time taken (Without Relic Drops & Selling Unused Relics) = {round(num_days, 2)} days")
+
+            num_seconds = num_hours * 3600 * 0.5
+            relic_drops = self.get_relic_drops(settlements, num_seconds)
+            total_cost, remains_no_relic = self.get_total_cost_for_multiple_relics(v, haves+relic_drops)
+            num_hours = (total_cost-current_essence)/eph
+            num_days = num_hours / 24    
+            print(f"Time taken (With Relic Drops after {round(num_seconds/3600, 2)} hours) ~= {round(num_hours, 2)} hours")
+            print(f"Time taken (With Relic Drops after {round(num_seconds/3600, 2)} hours) ~= {round(num_days, 2)} days")
+
+            if self.verbose:
+                print(f"Relics not used = {[self.relics[name]['name'] for name in remains_no_relic]}")
+
+            sold_essence = sum([self.relics[relic]['total_cost']*.4 for relic in remains_no_relic])
+            total_cost, remains_no_relic = self.get_total_cost_for_multiple_relics(v, haves+relic_drops)
+            num_hours = (total_cost-(current_essence+sold_essence))/eph
+            num_days = num_hours / 24               
+            print(f"Time taken (With Relic Drops after {round(num_seconds/3600, 2)} hours & Selling Unused Relics) ~= {round(num_hours, 2)} hours")
+            print(f"Time taken (With Relic Drops after {round(num_seconds/3600, 2)} hours & Selling Unused Relics) ~= {round(num_days, 2)} days")            
+
+#============================================
+# Shisha
+#============================================
+    def calculate_shisha(self):
+        relic_ids = list()
+        haves = list()
+
+        have_lookup = {}
+        have_lookup = { 
+            "Valor's Core": 2, 
+            "Noble Blade": 2,
+            "The Wall": 3,
+            "Determination's Core": 2,
+            "Immortal's Crown": 2,
+            "Wisdom's Core": 1,
+            "Immortal's Cinctures": 1,
+            "Blitz Arc": 2,
+            "Admonition": 1,
+        }        
+
+        for r, num in have_lookup.items():
+            for i in range(num):
+                haves.append(self.look_up[r])
+
+        thresholds = dict()
+        relic_ids.append(self.relic_tree['might'][3][3])
+        for r in self.relic_tree['might'][4]:
+            if r:
+                relic_ids.append(r)
+        relic_ids.append(self.look_up["Diligence"])
+        relic_ids.append(self.look_up["Master's Claw"])
+        relic_ids.append(self.look_up["Mercy and Malice"])
+        relic_ids.append(self.look_up["Star Of Valor"])
+
+        thresholds['might 5.4'] = copy.deepcopy(relic_ids)    
+
+        relic_ids.append(self.relic_tree['sustenance'][4][2])
+        relic_ids.append(self.relic_tree['sustenance'][4][4])
+        relic_ids.append(self.relic_tree['sustenance'][4][5])
+        relic_ids.append(self.relic_tree['sustenance'][4][6])
+
+        thresholds['might 5.4 + Sus 5.0'] = copy.deepcopy(relic_ids)    
+
+        relic_ids.append(self.relic_tree['fortitude'][3][2])
+        relic_ids.append(self.relic_tree['fortitude'][3][3])
+        relic_ids.append(self.relic_tree['fortitude'][3][4])  
+
+        for r in self.relic_tree['fortitude'][4]:
+            if r:
+                relic_ids.append(r)
+        # fort
+        relic_ids.append(5202) # 24% atk
+        relic_ids.append(5204) # 38% atk
+        relic_ids.append(5205) # 43% atk
+        relic_ids.append(5106) # 42% atk
+        thresholds['might 5.4 + sus 5.0 + fort 5.4'] = copy.deepcopy(relic_ids)
+
+        relic_ids.append(self.relic_tree['sorcery'][4][4])
+        relic_ids.append(self.relic_tree['sorcery'][4][5])
+        relic_ids.append(self.relic_tree['sorcery'][4][1])         
+        
+        # sorc
+        relic_ids.append(5202) # 24% atk
+        relic_ids.append(5404) # 28% atk
+        relic_ids.append(5405) # 69% atk
+        relic_ids.append(5406) # 47% atk
+        thresholds['might 5.4 + fort 5.4 + sus 5.0 + sorc 5.4'] = copy.deepcopy(relic_ids)
+        
+        cultivated_settlements = {7:1, 6:9, 5:25}        
+        uncultivated_settlements = {204:3, 203:1}
+        settlements = {7:1, 6:9, 5:25, 204:3, 203:1}        
+
+        settled_eph = int(self.get_eph(cultivated_settlements, uncultivated_settlements))
+        eph = 9628
+        current_essence = 173469
+
+        print("================================================================")
+        print("Resources")
+        print("================================================================")        
+        if eph != settled_eph:
+            print(f"{eph} != {settled_eph}")
+            return
+        print(f"Shisha - {datetime.now()}")
         print(f"Current EPH = {eph} essence/h")
         print(f"Current Essence = {current_essence}")
         print(f"Current relics = {[name + ' ' +str(value)+'x' for name, value in have_lookup.items()]}")
@@ -294,7 +425,7 @@ def sanity_check(calc):
 if __name__ == "__main__":
     verbose = False
     calc = calculator(verbose)
-    calc.calculate()
+    calc.calculate_shisha()
     # print(calc.settlements)
     # sanity_check(calc)
 
