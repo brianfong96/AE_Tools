@@ -160,6 +160,65 @@ class calculator:
 
         return relics
 
+    def calculate(self, relic_ids, have_lookup, thresholds, 
+    cultivated_settlements, uncultivated_settlements, settlements, 
+    eph, current_essence, name):   
+        haves = list()
+        for r, num in have_lookup.items():
+            for i in range(num):
+                haves.append(self.look_up[r])     
+
+        settled_eph = int(self.get_eph(cultivated_settlements, uncultivated_settlements))
+
+        print("================================================================")
+        print("Resources")
+        print("================================================================")
+        if eph != settled_eph:
+            "Discrepencies between given eph, and eph calculated from settlements"
+            return
+        print(f"{name} - {datetime.now()}")
+        print(f"Current EPH = {eph} essence/h")
+        print(f"Current Essence = {current_essence}")
+        print(f"Current relics = {[name + ' ' +str(value)+'x' for name, value in have_lookup.items()]}")
+        for k,v in thresholds.items():
+            print("================================================================")
+            print(f"Hitting {k.upper()}")
+            print("================================================================")
+
+            total_cost, remains_no_relic = self.get_total_cost_for_multiple_relics(v, haves)
+            num_hours = (total_cost-current_essence)/eph
+            num_days = num_hours / 24        
+            print(f"Time taken (Without Relic Drops) = {round(num_hours, 2)} hours")
+            print(f"Time taken (Without Relic Drops) = {round(num_days, 2)} days")
+
+            if self.verbose:
+                print(f"Relics not used = {[self.relics[name]['name'] for name in remains_no_relic]}")
+
+            sold_essence = sum([self.relics[relic]['total_cost']*.4 for relic in remains_no_relic])
+            total_cost, remains_no_relic = self.get_total_cost_for_multiple_relics(v, haves)
+            num_hours = (total_cost-(current_essence+sold_essence))/eph
+            num_days = num_hours / 24               
+            print(f"Time taken (Without Relic Drops & Selling Unused Relics) = {round(num_hours, 2)} hours")
+            print(f"Time taken (Without Relic Drops & Selling Unused Relics) = {round(num_days, 2)} days")
+
+            num_seconds = num_hours * 3600 * 0.5
+            relic_drops = self.get_relic_drops(settlements, num_seconds)
+            total_cost, remains_no_relic = self.get_total_cost_for_multiple_relics(v, haves+relic_drops)
+            num_hours = (total_cost-current_essence)/eph
+            num_days = num_hours / 24    
+            print(f"Time taken (With Relic Drops after {round(num_seconds/3600, 2)} hours) ~= {round(num_hours, 2)} hours")
+            print(f"Time taken (With Relic Drops after {round(num_seconds/3600, 2)} hours) ~= {round(num_days, 2)} days")
+
+            if self.verbose:
+                print(f"Relics not used = {[self.relics[name]['name'] for name in remains_no_relic]}")
+
+            sold_essence = sum([self.relics[relic]['total_cost']*.4 for relic in remains_no_relic])
+            total_cost, remains_no_relic = self.get_total_cost_for_multiple_relics(v, haves+relic_drops)
+            num_hours = (total_cost-(current_essence+sold_essence))/eph
+            num_days = num_hours / 24               
+            print(f"Time taken (With Relic Drops after {round(num_seconds/3600, 2)} hours & Selling Unused Relics) ~= {round(num_hours, 2)} hours")
+            print(f"Time taken (With Relic Drops after {round(num_seconds/3600, 2)} hours & Selling Unused Relics) ~= {round(num_days, 2)} days")            
+
 
 #============================================
 # Voiren
@@ -309,6 +368,18 @@ class calculator:
                 haves.append(self.look_up[r])
 
         thresholds = dict()
+
+        # sorc
+        relic_ids.append(self.relic_tree['sorcery'][4][4])
+        relic_ids.append(self.relic_tree['sorcery'][4][5])
+        relic_ids.append(self.relic_tree['sorcery'][4][1])         
+        relic_ids.append(5202) # 24% atk
+        relic_ids.append(5404) # 28% atk
+        relic_ids.append(5405) # 69% atk
+        relic_ids.append(5406) # 47% atk
+        thresholds['sorc 5.4'] = copy.deepcopy(relic_ids)
+
+        # might
         relic_ids.append(self.relic_tree['might'][3][3])
         for r in self.relic_tree['might'][4]:
             if r:
@@ -317,47 +388,42 @@ class calculator:
         relic_ids.append(self.look_up["Master's Claw"])
         relic_ids.append(self.look_up["Mercy and Malice"])
         relic_ids.append(self.look_up["Star Of Valor"])
+        thresholds['sorc 5.4 + might 5.4'] = copy.deepcopy(relic_ids)    
 
-        thresholds['might 5.4'] = copy.deepcopy(relic_ids)    
-
+        # sus
         relic_ids.append(self.relic_tree['sustenance'][4][2])
         relic_ids.append(self.relic_tree['sustenance'][4][4])
         relic_ids.append(self.relic_tree['sustenance'][4][5])
         relic_ids.append(self.relic_tree['sustenance'][4][6])
+        thresholds['sorc 5.4 + might 5.4 + Sus 5.0'] = copy.deepcopy(relic_ids)    
 
-        thresholds['might 5.4 + Sus 5.0'] = copy.deepcopy(relic_ids)    
-
+        # fort
         relic_ids.append(self.relic_tree['fortitude'][3][2])
         relic_ids.append(self.relic_tree['fortitude'][3][3])
         relic_ids.append(self.relic_tree['fortitude'][3][4])  
-
         for r in self.relic_tree['fortitude'][4]:
             if r:
                 relic_ids.append(r)
-        # fort
         relic_ids.append(5202) # 24% atk
         relic_ids.append(5204) # 38% atk
         relic_ids.append(5205) # 43% atk
         relic_ids.append(5106) # 42% atk
-        thresholds['might 5.4 + sus 5.0 + fort 5.4'] = copy.deepcopy(relic_ids)
+        thresholds['sorc 5.4 + might 5.4 + sus 5.0 + fort 5.4'] = copy.deepcopy(relic_ids)
+        
+        # cultivated_settlements = {7:2, 6:9, 5:25}        
+        # uncultivated_settlements = {204:3, 203:1}
+        # settlements = {7:1, 6:9, 5:25, 204:3, 203:1}        
 
-        relic_ids.append(self.relic_tree['sorcery'][4][4])
-        relic_ids.append(self.relic_tree['sorcery'][4][5])
-        relic_ids.append(self.relic_tree['sorcery'][4][1])         
-        
-        # sorc
-        relic_ids.append(5202) # 24% atk
-        relic_ids.append(5404) # 28% atk
-        relic_ids.append(5405) # 69% atk
-        relic_ids.append(5406) # 47% atk
-        thresholds['might 5.4 + fort 5.4 + sus 5.0 + sorc 5.4'] = copy.deepcopy(relic_ids)
-        
-        cultivated_settlements = {7:1, 6:9, 5:25}        
-        uncultivated_settlements = {204:3, 203:1}
-        settlements = {7:1, 6:9, 5:25, 204:3, 203:1}        
+        # settled_eph = int(self.get_eph(cultivated_settlements, uncultivated_settlements))
+        # eph = 9628 + 280*1.2
+        # current_essence = 173469
+
+        cultivated_settlements = {7:6, 6:27, 5:6}        
+        uncultivated_settlements = {204:1}
+        settlements = {7:6, 6:27, 5:6, 204:1}        
 
         settled_eph = int(self.get_eph(cultivated_settlements, uncultivated_settlements))
-        eph = 9628
+        eph = 11412
         current_essence = 173469
 
         print("================================================================")
