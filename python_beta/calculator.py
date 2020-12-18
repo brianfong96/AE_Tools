@@ -242,8 +242,7 @@ class calculator:
             "Blitz Arc": 2,
             "Cathedral Censer": 3,
             "Noble Blade": 2,
-            "Admonition": 1,
-            "Heart Of Agility": 1
+            "Admonition": 1
         }        
 
         for r, num in have_lookup.items():
@@ -292,7 +291,7 @@ class calculator:
 
         settled_eph = int(self.get_eph(cultivated_settlements, uncultivated_settlements))
         eph = 11412
-        current_essence = 281711
+        current_essence = 338578
 
         print("================================================================")
         print("Resources")
@@ -315,7 +314,7 @@ class calculator:
             print(f"Time taken (Without Relic Drops) = {round(num_hours, 2)} hours")
             print(f"Time taken (Without Relic Drops) = {round(num_days, 2)} days")
 
-            if self.verbose:
+            if True:
                 print(f"Relics not used = {[self.relics[name]['name'] for name in remains_no_relic]}")
 
             sold_essence = sum([self.relics[relic]['total_cost']*.4 for relic in remains_no_relic])
@@ -491,7 +490,7 @@ def sanity_check(calc):
 if __name__ == "__main__":
     verbose = False
     calc = calculator(verbose)
-    calc.calculate_shisha()
+    calc.calculate_voiren()
     # print(calc.settlements)
     # sanity_check(calc)
 
