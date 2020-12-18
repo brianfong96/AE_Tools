@@ -1,0 +1,91 @@
+id	name	quality	totalcost	components
+1104	The Hidden Blade	Common	1980	
+1105	Guardsman's Girdle	Common	2880	
+1106	Jewel Of Valor	Common	2100	
+1201	Simple Kite Shield	Common	2760	
+1202	Swordplay Bracers	Common	1620	
+1203	Guardsmen's Garb	Common	2160	
+1204	Shrine Censer	Common	1680	
+1205	Ruthless Chopper	Common	1200	
+1206	Jewel Of Determination	Common	2220	
+1304	Fear Mask	Common	2400	
+1305	Traveler's Boots	Common	2820	
+1306	Jewel Of Agility	Common	1500	
+1404	Oracle's Pendant	Common	1140	
+1405	Book of Scholars	Common	1800	
+1406	Jewel Of Wisdom	Common	1980	
+1504	Poet's Cup	Common	1560	
+1505	Apprentice's Seal	Common	2160	
+1506	Jewel Of Compassion	Common	2400	
+2104	Regicide	Rare	5220	"1104, 1205, 1404"
+2105	Officer's Belt	Rare	7800	"1105, 1203, 1304"
+2106	Eye Of Valor	Rare	5700	"1106, 1106"
+2201	Dark Steel Shield	Rare	7200	"1201, 1203, 1505"
+2202	Mercenary Bracers	Rare	4920	"1202, 1202"
+2203	Scout's Embrace	Rare	5700	"1203, 1304"
+2204	Temple Censer	Rare	6600	"1204, 1505"
+2205	Fury's Call	Rare	5220	"1205, 1104"
+2206	Eye Of Determination	Rare	5820	"1206, 1206"
+2304	Confessor's Mask	Rare	6600	"1304, 1505"
+2305	Cavalry Boots	Rare	7200	"1305, 1404"
+2306	Eye Of Agility	Rare	4860	"1306, 1306"
+2404	Oath of the Setting Sun	Rare	3960	"1404, 1404, 1404"
+2405	Book of Runes	Rare	6600	"1405, 1405, 1504"
+2406	Eye Of Wisdom	Rare	5280	"1406, 1406"
+2504	Chalice of Light	Rare	6600	"1504, 1504, 1405"
+2505	Sunwalker Seal	Rare	6000	"1505, 1404, 1204"
+2506	Eye Of Compassion	Rare	5820	"1506, 1506"
+3104	Blitz Arc	Elite	13800	"2104, 2205"
+3105	Immortal's Cinctures	Elite	22800	"2105, 2202, 2505"
+3106	Valor's Core	Elite	13800	"2106, 2106"
+3201	The Wall	Elite	21600	"2201, 2201, 2203"
+3202	Arena Bracers	Elite	14400	"2202, 2204"
+3203	Body of Grace	Elite	17400	"2203, 2201, 1201"
+3204	Cathedral Censer	Elite	23400	"2204, 2505"
+3205	Noble Blade	Elite	16200	"2205, 2104"
+3206	Determination's Core	Elite	13800	"2206, 2206"
+3304	Veil of Silence	Elite	18600	"2304, 2203, 2404"
+3305	Rambler's Boots	Elite	22800	"2305, 2505"
+3306	Agility's Core	Elite	12000	"2306, 2306"
+3404	Immortal's Crown	Elite	13200	"2404, 2404, 2404"
+3405	Admonition	Elite	18000	"2405, 2406"
+3406	Wisdom's Core	Elite	15600	"2406, 2406"
+3504	Kuilin Ring	Elite	19200	"2504, 2405, 1504"
+3505	Saint's Signet	Elite	18000	"2505, 2105"
+3506	Compassion's Core	Elite	15600	"2506, 2506"
+4104	Cloud Piercer	Legendary	46800	"3104, 3205, 3404"
+4105	Everlasting Resolve	Legendary	90000	"3105, 3202, 3505, 3305"
+4106	Heart Of Valor	Legendary	66000	"3106, 3106, 3106"
+4201	The Bastion	Legendary	90000	"3201, 3201, 3203, 3203"
+4202	The Imperishable	Legendary	52800	"3202, 3204"
+4203	Radiance of the Apostle	Legendary	66000	"3203, 3201, 2201, 3203"
+4204	Basilica Censer	Legendary	96000	"3204, 3505, 3204"
+4205	Eternal Warrior	Legendary	55800	"3205, 3104, 3404"
+4206	Heart Of Determination	Legendary	66000	"3206, 3206, 3206"
+4304	Hushed Veil	Legendary	66000	"3304, 3203, 3404"
+4305	Dawn Striders	Legendary	90000	"3305, 3505, 3304"
+4306	Heart Of Agility	Legendary	72000	"3306, 3306, 3306"
+4404	Crown of the Monarch	Legendary	55800	"3404, 3404, 3504"
+4405	Divinity's Axiom	Legendary	72000	"3405, 3406, 3204"
+4406	Heart Of Wisdom	Legendary	72000	"3406, 3406, 3406"
+4504	Mark of Compassion	Legendary	75000	"3504, 3405, 2504, 3104"
+4505	Star-sight	Legendary	81000	"3505, 3105, 3305"
+4506	Heart Of Compassion	Legendary	72000	"3506, 3506, 3506"
+5104	Mercy and Malice	Mythic	180000	"4104, 4205, 4404"
+5105	The Austere Resolve	Mythic	372000	"4105, 4202, 4505, 4305"
+5106	Star Of Valor	Mythic	354000	"4106, 4106, 4106"
+5201	Hero's Vow	Mythic	360000	"4201, 4201, 4203, 4203"
+5202	Horn Of Defiance	Mythic	210000	"4202, 4204"
+5203	Light's Hope	Mythic	294000	"4203, 4201, 3201, 4203"
+5204	Master's Claw	Mythic	252000	"4204, 4505"
+5205	Diligence	Mythic	228000	"4205, 4104, 4404"
+5206	Star Of Determination	Mythic	330000	"4206, 4206, 4206"
+5304	Conquest Eternal	Mythic	288000	"4304, 4203, 4404"
+5305	Legacy of the Fallen	Mythic	396000	"4305, 4505, 4304"
+5306	Star Of Agility	Mythic	330000	"4306, 4306, 4306"
+5404	Light's Truth	Mythic	192000	"4404, 4504, 4205"
+5405	Wizard's Spire	Mythic	300000	"4405, 4204, 4204"
+5406	Star Of Wisdom	Mythic	312000	"4406, 4406, 4406"
+5504	Heirloom Of Time	Mythic	264000	"4504, 4405, 3504, 4104"
+5505	Sacred Grail	Mythic	270000	"4505, 4105, 4305"
+5506	Star Of Compassion	Mythic	348000	"4506, 4506, 4506"
