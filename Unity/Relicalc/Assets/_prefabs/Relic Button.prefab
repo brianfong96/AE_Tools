@@ -120,7 +120,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 2953688899646492575}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: -4247345487638123256}
+        m_TargetAssemblyTypeName: RelicButton, Assembly-CSharp
+        m_MethodName: AddRelic
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &-4247345487638123256
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -138,6 +150,8 @@ MonoBehaviour:
   levels: {fileID: 7664681802295918947, guid: 286f5efda6c62d346a7e18adff3c38c0, type: 3}
   display: {fileID: 0}
   position: 1
+  added: {fileID: 0}
+  addedRelicButton: {fileID: 276931051231460905, guid: 7e911e0e95d42e3458572c3c7d0b7fcf, type: 3}
 --- !u!1 &2953688899975989823
 GameObject:
   m_ObjectHideFlags: 0
