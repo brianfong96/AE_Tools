@@ -3,11 +3,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class RelicTree : MonoBehaviour
+public class RelicTree
 {
-    [SerializeField] public Dictionary<string, ClassBranch> Branches { get; }
-    [SerializeField] public Dictionary<int, Relic> IdToRelics { get; }
-    [SerializeField] public  Dictionary<string, int> NameToId { get; }
+    public Dictionary<string, ClassBranch> Branches { get; }
+    public Dictionary<int, Relic> IdToRelics { get; }
+    public  Dictionary<string, int> NameToId { get; }
 
     public RelicTree(string tsv, Dictionary<int, Relic> relics)
     {
@@ -37,7 +37,7 @@ public class RelicTree : MonoBehaviour
                 Branches[classBranch] = new ClassBranch();
             }
 
-            Branches[classBranch].LevelBranches[level] = new LevelBranch(r1, r2, r3, r4, r5, r6);            
+            Branches[classBranch].LevelBranches[level] = new LevelBranch(r1, r2, r3, r4, r5, r6);                        
         }
     }
 }

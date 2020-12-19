@@ -7,7 +7,7 @@ public class Calculator : MonoBehaviour
 {
     [SerializeField] private TextAsset relics;
     [SerializeField] private TextAsset tree;
-    [SerializeField] private RelicTree relicTree;
+    [SerializeField] public RelicTree Relics;
 
     // Start is called before the first frame update
     void Start()
@@ -22,8 +22,11 @@ public class Calculator : MonoBehaviour
             relicsById[Int32.Parse(rawRelic[0])] = relic;
         }
 
-        relicTree = new RelicTree(tree.text, relicsById);
-
+        Relics = new RelicTree(tree.text, relicsById);
+        if (Relics == null)
+        {
+            print("Relic tree failed to create.");
+        }
     }
 
     // Update is called once per frame
