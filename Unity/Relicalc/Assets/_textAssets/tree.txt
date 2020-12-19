@@ -1,0 +1,26 @@
+Branch	Level	Relic ID 1	Relic Name 1	Relic ID 2	Relic Name 2	Relic ID 3	Relic Name 3	Relic ID 4	Relic Name 4	Relic ID 5	Relic Name 5	Relic ID 6	Relic Name 6
+Might	1	1203	Guardsmen's Garb	1205	Ruthless Chopper	1204	Shrine Censer	1104	The Hidden Blade	1105	Guardsman's Girdle	1106	Jewel Of Valor
+Might	2	2203	Scout's Embrace	2205	Fury's Call	2204	Temple Censer	2104	Regicide	2105	Officer's Belt	2106	Eye Of Valor
+Might	3	3203	Body of Grace	3205	Noble Blade	3204	Cathedral Censer	3104	Blitz Arc	3105	Immortal's Cinctures	3106	Valor's Core
+Might	4	4203	Radiance of the Apostle	4205	Eternal Warrior	4204	Basilica Censer	4104	Cloud Piercer	4105	Everlasting Resolve	4106	Heart Of Valor
+Might	5	5203	Light's Hope	5205	Diligence	5204	Master's Claw	5104	Mercy and Malice	5105	The Austere Resolve	5106	Star Of Valor
+Fortitude	1	1201	Simple Kite Shield	1202	Swordplay Bracers	1203	Guardsmen's Garb	1204	Shrine Censer	1205	Ruthless Chopper	1206	Jewel Of Determination
+Fortitude	2	2201	Dark Steel Shield	2202	Mercenary Bracers	2203	Scout's Embrace	2204	Temple Censer	2205	Fury's Call	2206	Eye Of Determination
+Fortitude	3	3201	The Wall	3202	Arena Bracers	3203	Body of Grace	3204	Cathedral Censer	3205	Noble Blade	3206	Determination's Core
+Fortitude	4	4201	The Bastion	4202	The Imperishable	4203	Radiance of the Apostle	4204	Basilica Censer	4205	Eternal Warrior	4206	Heart Of Determination
+Fortitude	5	5201	Hero's Vow	5202	Horn Of Defiance	5203	Light's Hope	5204	Master's Claw	5205	Diligence	5206	Star Of Determination
+Celerity	1	1205	Ruthless Chopper	1104	The Hidden Blade	1204	Shrine Censer	1304	Fear Mask	1305	Traveler's Boots	1306	Jewel Of Agility
+Celerity	2	2205	Fury's Call	2104	Regicide	2204	Temple Censer	2304	Confessor's Mask	2305	Cavalry Boots	2306	Eye Of Agility
+Celerity	3	3205	Noble Blade	3104	Blitz Arc	3204	Cathedral Censer	3304	Veil of Silence	3305	Rambler's Boots	3306	Agility's Core
+Celerity	4	4205	Eternal Warrior	4104	Cloud Piercer	4204	Basilica Censer	4304	Hushed Veil	4305	Dawn Striders	4306	Heart Of Agility
+Celerity	5	5205	Diligence	5104	Mercy and Malice	5204	Master's Claw	5304	Conquest Eternal	5305	Legacy of the Fallen	5306	Star Of Agility
+Sorcery	1	1305	Traveler's Boots	1202	Swordplay Bracers	1304	Fear Mask	1404	Oracle's Pendant	1405	Book of Scholars	1406	Jewel Of Wisdom
+Sorcery	2	2305	Cavalry Boots	2202	Mercenary Bracers	2304	Confessor's Mask	2404	Oath of the Setting Sun	2405	Book of Runes	2406	Eye Of Wisdom
+Sorcery	3	3305	Rambler's Boots	3202	Arena Bracers	3304	Veil of Silence	3404	Immortal's Crown	3405	Admonition	3406	Wisdom's Core
+Sorcery	4	4305	Dawn Striders	4202	The Imperishable	4304	Hushed Veil	4404	Crown of the Monarch	4405	Divinity's Axiom	4406	Heart Of Wisdom
+Sorcery	5	5305	Legacy of the Fallen	5202	Horn Of Defiance	5304	Conquest Eternal	5404	Light's Truth	5405	Wizard's Spire	5406	Star Of Wisdom
+Sustenance	1	1305	Traveler's Boots	1404	Oracle's Pendant	1202	Swordplay Bracers	1504	Poet's Cup	1505	Apprentice's Seal	1506	Jewel Of Compassion
+Sustenance	2	2305	Cavalry Boots	2404	Oath of the Setting Sun	2202	Mercenary Bracers	2504	Chalice of Light	2505	Sunwalker Seal	2506	Eye Of Compassion
+Sustenance	3	3305	Rambler's Boots	3404	Immortal's Crown	3202	Arena Bracers	3504	Kuilin Ring	3505	Saint's Signet	3506	Compassion's Core
+Sustenance	4	4305	Dawn Striders	4404	Crown of the Monarch	4202	The Imperishable	4504	Mark of Compassion	4505	Star-sight	4506	Heart Of Compassion
+Sustenance	5	5305	Legacy of the Fallen	5404	Light's Truth	5202	Horn Of Defiance	5504	Heirloom Of Time	5505	Sacred Grail	5506	Star Of Compassion

@@ -1,8 +1,9 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine;
 
-public class Relic
+public class Relic : MonoBehaviour
 {
     public string Id { get; }
     public string Name { get; }
